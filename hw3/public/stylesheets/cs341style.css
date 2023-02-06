@@ -1,0 +1,84 @@
+/* Chiara Profenna */
+
+/* changes heading font and background */
+h1 {
+  font-family: "Brush Script MT", cursive;
+  color: white;
+  background-color: #F987C5;
+  font-size: 200%;
+}
+
+/* changes body elements font and background */
+body {
+  background-image: url(https://img.freepik.com/premium-vector/cute-heart-pattern-pink-background-perfect-wallpaper-backdrop-postcard-background_565280-401.jpg?w=2000);
+  background-color: #ffb6c1;
+  font-family: "Lucida Handwriting", cursive;
+  font-size: large;
+  text-align: center;
+  color: #e75480;
+}
+
+/* centers table elements */
+table {
+  text-align: left;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* centers list elements */
+ul {
+  display: table; 
+  margin: 0 auto;
+  text-align: left;
+}
+
+/* Dropdown Button */
+.dropbtn {
+  background-color: #F987C5;
+  color: white;
+  padding: 16px;
+  font-size: 18px;
+  font-family: "Lucida Handwriting", cursive;
+  border: none;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  height: 130px;
+  overflow: auto;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+  background-color: #ddd
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {
+  background-color: #e75480;
+}

@@ -1,0 +1,156 @@
+<!-- Chiara Profenna -->
+
+<!DOCTYPE html>
+  <html>
+    <head>
+
+      <!-- links to css file and adds title -->
+      <link rel="stylesheet" href="hw3/public/stylesheets/cs341style.css">
+      <title>Cheesecake Order Form</title>
+
+      <script
+        src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"/>
+      </script>
+
+  </head>
+  <body>
+
+    <!-- adds heading and image -->
+    <h1>Cheesecake Order Form</h1>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/9/9c/Mondays_at_Il_Forno_-_Cheesecake_with_strawberry_sauce.jpg" width="200" height="200">
+
+    <!-- adds body text and table element -->
+    <p id="quantityText">Quantity Topping</p>
+    <table id="table">
+      <tr>
+        <td>
+          <!-- dropdown menu -->
+          <select name="num-toppings" id="num-toppings">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+          </select>
+        </td>
+        <td>
+          <!-- radio buttons -->
+          <input type="radio" id="plain" name="topping" value="plain">
+          <label for="plain"> plain </label><br>
+          <input type="radio" id="cherry" name="topping" value="cherry">
+          <label for="cherry"> cherry </label><br>
+          <input type="radio" id="chocolate" name="topping" value="chocolate">
+          <label for="chocolate"> chocolate </label>
+        </td>
+    </table>
+
+    <!-- adds body text and textarea element -->
+    <br>
+    <label for="textbox" id="notesText">Notes:</label>
+    <br>
+    <textarea id="textbox" name="textbox" rows="4" cols="50">
+      Enter any special instructions here.
+    </textarea>
+
+    <!-- adds submit button and list element-->
+    <br>
+    <input id="button" type="submit" value="Order" />
+    
+
+    <!-- adds total orders heading and dropdown element-->
+    <h3 id="ordersHeading">Orders for</h3>
+
+    <div class="dropdown" id="dropdownItem">
+      <button class="dropbtn" >Select a month</button>
+      <div onclick="myFunction()" class="dropdown-content" id = "dropdownContent">
+        <a id="jan">Jan</a>
+        <a id="feb">Feb</a>
+        <a id="mar">Mar</a>
+        <a id="apr">Apr</a>
+        <a id="may">May</a>
+        <a id="june">Jun</a>
+        <a id="july">Jul</a>
+        <a id="aug">Aug</a>
+        <a id="sep">Sep</a>
+        <a id="oct">Oct</a>
+        <a id="nov">Nov</a>
+        <a id="dec">Dec</a>
+      </div>
+    </div>
+
+    <!-- adds list element-->
+    <ul id="totalItems">
+      <br>
+      <li>11 cherry</li>
+      <li>17 chocolate</li>
+      <li>31 plain</li>
+    </ul>
+
+</body>
+
+<script>
+// labels all the elements 
+var submitButton = document.getElementById('button');
+var textbox = document.getElementById('textbox');
+var totalItems = document.getElementById('totalItems');
+var table = document.getElementById('table');
+var quantityText = document.getElementById('quantityText');
+var ordersHeading = document.getElementById('ordersHeading');
+var notesText = document.getElementById('notesText');
+var dropdownItem = document.getElementById('dropdownItem');
+
+// get number from dropdown menu
+var select = document.getElementById('num-toppings');
+
+// get topping choice from radio buttons
+var topping;
+
+// determines which dropdown item the user clicked on and appends to text
+function myFunction() {
+  $(".dropdown-content").on("click",(function(){
+    var selected =$(this).text(); 
+    //ordersHeading.append(selected);
+  }));    
+}
+
+// listen for order button to be pressed
+submitButton.addEventListener('click', function handleClick() {
+
+// get notes
+var notes = document.getElementById("textbox").value;
+
+// get topping selection
+  if(document.getElementById('cherry').checked) {
+    topping = document.getElementById("cherry").value;
+  }else if(document.getElementById('chocolate').checked) {
+    topping = document.getElementById("chocolate").value;
+  }else {
+    topping = document.getElementById("plain").value;
+  }
+
+// get number of toppings
+var numToppings = select.options[select.selectedIndex].value;
+
+// if user asks for vegan cheesecake, alert them that cheesecake contains dairy
+// if not, remove all the elements
+if ($('#textbox').val().indexOf('vegan') != -1){
+  alert('Cheesecake contains dairy');
+} else if ($('#textbox').val().indexOf('Vegan') != -1){
+  alert('Cheesecake contains dairy');
+} else {
+ submitButton.remove();
+ textbox.remove();
+ totalItems.remove();
+ table.remove();
+ ordersHeading.remove();
+ notesText.remove();
+ dropdownItem.remove();
+
+ // type thank you message
+ quantityText.innerHTML = "Thank you! Your order has been placed." + "<br />" + numToppings + " topping(s)" + "<br />" + topping + "<br />" + notes;
+
+}
+
+
+});
+</script>
+
+</html>
