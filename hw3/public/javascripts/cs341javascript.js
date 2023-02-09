@@ -1,3 +1,4 @@
+// Chiara Profenna
 // labels all the elements
 var submitButton = document.getElementById('button');
 var textbox = document.getElementById('textbox');
