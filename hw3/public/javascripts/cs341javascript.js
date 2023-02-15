@@ -9,15 +9,32 @@ var ordersHeading = document.getElementById('ordersHeading');
 var notesText = document.getElementById('notesText');
 var dropdownItem = document.getElementById('dropdownItem');
 var topping;
+var totalItems = document.getElementById('totalItems');
 
 // get number from dropdown menu
 var select = document.getElementById('num-toppings');
 
 // determines which dropdown item the user clicked on and appends to text
-function myFunction() {
+function main() {
   $(".dropdown-content").on("click",(function(){
     var selected =$(this).text();
-    //ordersHeading.append(selected);
+    //to get months working, ask for the text of the element that was clicked
+
+    // POST goes to the orders page reads in JSON obj and replaces bullet pts with JSON obj
+    // not passing in any data yet, eventually month
+    $.post('/orders', null,
+        function(data,status,xhr) {
+            // make data readable
+            var jsonString = JSON.stringify(data);
+            // format string to display json data correctly
+            var splitString = jsonString.split("\"")
+            var joined = splitString.join(', ');
+            var noSpecialChars = joined.replace(/[^a-zA-Z0-9 ]/g, '');
+            var omitTopping = noSpecialChars.replaceAll("topping", "<br />");
+            var omitQuantity = omitTopping.replaceAll("quantity", " : ");
+            // print final formatted string to screen
+            totalItems.innerHTML = omitQuantity;
+        });
   }));
 }
 

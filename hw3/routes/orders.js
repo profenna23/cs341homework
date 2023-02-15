@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET orders listing. */
-router.get('/', function(req, res, next) {
+/* POST orders listing. */
+router.post('/', function(req, res, next) {
   // create array for topping & quantity
   const array = [
                   {
@@ -19,7 +19,7 @@ router.get('/', function(req, res, next) {
                   }
                 ]
 
-  // creat json obj and parse string
+  // create json obj and parse string
   const json = JSON.stringify(array);
 
   // add headers
@@ -30,7 +30,6 @@ router.get('/', function(req, res, next) {
   res.write(json);
   res.end();
 
-  }
 });
 
 module.exports = router;
