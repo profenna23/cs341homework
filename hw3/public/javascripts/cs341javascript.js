@@ -40,6 +40,11 @@ function main() {
 
 // listen for order button to be pressed
 submitButton.addEventListener('click', function handleClick() {
+  $.post('/neworder', null, function(data,status,xhr) {
+    // when order button is clicked, post new order to database
+    return;
+    });
+
 
   // get notes
   var notes = document.getElementById("textbox").value;

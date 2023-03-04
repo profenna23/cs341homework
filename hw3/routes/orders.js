@@ -1,4 +1,5 @@
 // Chiara Profenna
+var dbms = require('./dbms_promise');
 var express = require('express');
 var router = express.Router();
 
@@ -20,29 +21,56 @@ router.post('/', function(req, res, next) {
                   }
                 ]
 
-  // Modify this file to access the orders data for the given month from the database and return that data to the client
-  // JSON object you construct and return will have the same structure as before
-  // each time a different month has been selected a different order summary should be displayed based upon what is in the database
-  // server-side javascript should be constructing the SELECT statement and then parsing the results
+  // hardcoded month selection
+  var selectedMonth = "DEC";
 
-  // find a way to access what month was clicked
+  // returns promise
+  let myPromise = dbms.dbquery("SELECT QUANTITY, TOPPING FROM ORDERS WHERE MONTH=\""+selectedMonth+"\";");
 
-  // THIS IS CODE FOR HW5:
-  //var selectedMonth = ?;
-  //const data = JSON.dbquery(SELECT QUANTITY, TOPPING FROM ORDERS WHERE MONTH=selectedMonth);
-  //create json obj and parse string
-  //const json = JSON.stringify(data);
+  // "Consuming Code" (Must wait for a fulfilled Promise)
+  myPromise.then(
+    function(rows) {
 
-  // create json obj and parse string
-  const json = JSON.stringify(array);
+        //convert rows into a structure like dummy data above
+        // FOR TESTING, DEC RETURNS 2 PLAIN 1 CHOC
 
-  // add headers
-  res.setHeader("Content-Type", "application/json");
-  res.setHeader("Access-Control-Allow-Origin", "*");
+       console.log("query came back");
+       console.log(rows[0]);
 
-  // return json obj
-  res.write(json);
-  res.end();
+       const data = [
+                         /*{
+                         "topping": "cherry",
+                         "quantity": "2",
+                         }
+                         */
+                       ]
+       console.log(data);
+       //for loop over rows, add to data
+       for (let i = 0; i < rows.length; i++) {
+         //row[i].QUANTITY;
+         data.push({
+                    "topping": rows[i].TOPPING,
+                    "quantity": rows[i].QUANTITY,
+                    });
+       }
+
+       console.log(data);
+       console.log("goodbye");
+
+       //create json obj and parse string
+       const json = JSON.stringify(data);
+
+
+       // add headers
+       res.setHeader("Content-Type", "application/json");
+       res.setHeader("Access-Control-Allow-Origin", "*");
+
+        // return json obj
+        res.write(json);
+res.end(); },
+    function(error) { /* code if some error */ }
+  );
+
 
 });
 
